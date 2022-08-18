@@ -1,5 +1,6 @@
 
 import { Box } from '@mui/system'
+import { NavBar } from '../components';
 
 const drawerWidth = 240;
 
@@ -7,7 +8,7 @@ export const JournalLayout = ({ children }) => {
   return (
     <Box sx={{display: 'flex'}}>
 
-        {/* Navbar drawerwidth */}
+        <NavBar drawerWidth={drawerWidth} />
 
         {/* Sidebar drawerwidth*/}
 
