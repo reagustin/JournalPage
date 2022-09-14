@@ -1,14 +1,15 @@
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "../../hooks";
 
-import { SaveOutlined } from "@mui/icons-material";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import 'sweetalert2/dist/sweetalert2.css';
 
-import { useForm } from "../../hooks";
 import { ImageGallery } from "../components";
-import { setActiveNote, startSaveNote } from "../../store/journal";
+import { setActiveNote, startSaveNote, startUploadingFiles } from "../../store/journal";
+
 
 
 export const NoteView = () => {
@@ -26,6 +27,8 @@ export const NoteView = () => {
     }
     , [date])
 
+    const fileInputRef = useRef();
+
     useEffect(() => {
         dispatch(setActiveNote(formState));
     }, [formState])
@@ -42,6 +45,13 @@ export const NoteView = () => {
         dispatch(startSaveNote());
     }
 
+    const onFileInputChange = ({target}) => {
+        
+        if(target.files === 0) return;
+        // console.log('subiendo archivos');
+        dispatch(startUploadingFiles(target.files));
+    }
+
   return (
     <Grid
         className="animate__animated animate__fadeIn animate__faster" 
@@ -52,6 +62,21 @@ export const NoteView = () => {
             <Typography fontSize={39} fontWeight='light'>{dateString}</Typography>
         </Grid>
         <Grid>
+
+            <input
+                type="file"
+                multiple
+                ref={fileInputRef}
+                onChange={onFileInputChange}
+                style={{display: 'none'}}
+            />
+            <IconButton
+                color="primary"
+                disabled={isSaving}
+                onClick={ () => fileInputRef.current.click()}
+            >
+                <UploadOutlined/>
+            </IconButton>
             <Button
                 disabled={isSaving} 
                 onClick={onSaveNote}
