@@ -2,7 +2,7 @@ import { useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks";
 
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import { Notes, SaveOutlined, UploadOutlined } from "@mui/icons-material";
 import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import 'sweetalert2/dist/sweetalert2.css';
@@ -110,7 +110,7 @@ export const NoteView = () => {
             />
         </Grid>
 
-        <ImageGallery/>
+        <ImageGallery images={note.imageUrls} />
     </Grid> 
     
   )
