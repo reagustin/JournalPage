@@ -62,7 +62,6 @@ describe('pruebas en authThunks', () => {
         expect(dispatch).toHaveBeenCalledWith(logout(loginData.errorMessage));
     });
 
-    ///
 
     test('startCreatingUserWithEmailPassword debe de llamar checkingCredentials y login - Exito', async() => { 
         
@@ -86,9 +85,6 @@ describe('pruebas en authThunks', () => {
         expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
         expect(dispatch).toHaveBeenCalledWith(logout(loginData.errorMessage));
     });
-
-
-    //faltan dos pruebas aca
 
     test('startLogout debe de llamar logoutFirebase, clearnotes y logout', async() => { 
 
